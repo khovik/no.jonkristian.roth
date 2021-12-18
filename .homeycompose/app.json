@@ -1,8 +1,8 @@
 {
   "id": "no.jonkristian.touchline",
-  "version": "1.0.2",
+  "version": "2.0.0",
   "compatibility": ">=5.0.0",
-  "sdk": 2,
+  "sdk": 3,
   "brandColor": "#F72D16",
   "name": {
     "en": "Roth Touchline",

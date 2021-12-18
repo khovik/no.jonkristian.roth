@@ -12,7 +12,9 @@ class TouchlineDevice extends Homey.Device {
   async onInit() {
     this.setAvailable();
 
-    this.controller = new TouchlineController( this.getData().id );
+    const controllerIp = this.homey.settings.get('controllerIP');
+
+    this.controller = new TouchlineController( this.getData().id, controllerIp );
     this.polling = true;
 
 		this.addListener('poll', this.pollDevice);
@@ -70,6 +72,8 @@ class TouchlineDevice extends Homey.Device {
    * @param {string} name The new name
    */
   async onRenamed(name) {
+    // Update IP in case settings has been updated.
+    this.controller.updateControllerIP(this.homey.settings.get('controllerIP'));
     await this.controller.applyControllerData('name', name).catch(error => this.log(error));
   }
 
@@ -87,6 +91,9 @@ class TouchlineDevice extends Homey.Device {
    */
   async pollDevice() {
     while (this.polling) {
+      // Update IP in case settings has been updated.
+      this.controller.updateControllerIP(this.homey.settings.get('controllerIP'));
+
       const params = this.prepareDeviceParams();
       await this.controller.getControllerData(params)
       .then(result => {
@@ -110,7 +117,7 @@ class TouchlineDevice extends Homey.Device {
         // this.log(error);
       });
 
-      let pollInterval = Homey.ManagerSettings.get('pollInterval') || 120;
+      let pollInterval = this.homey.settings.get('pollInterval') || 120;
       await delay(pollInterval*1000);
     }
   }
