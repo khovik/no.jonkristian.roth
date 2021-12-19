@@ -111,6 +111,10 @@ class TouchlineDevice extends Homey.Device {
           this.setCapabilityValue('measure_temperature', data.RaumTemp/100).catch(err => this.log(err));
           this.setCapabilityValue('target_temperature', data.SollTemp/100).catch(err => this.log(err));
         }
+        else
+        {
+          //this.log("Unable to fetch Roth values.");
+        }
       })
       .catch(error => {
         // Sometimes these thermostats doesn't report back, supressing errors.
