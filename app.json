@@ -33,6 +33,14 @@
       }
     }
   },
+  "contributors": {
+    "developers": [
+      {
+        "name": "Kåre Høvik",
+        "email": "kare@hovik.org"
+      }
+    ]
+  },
   "source": "https://github.com/jonkristian/no.jonkristian.roth",
   "bugs": {
     "url": "https://github.com/jonkristian/no.jonkristian.roth/issues"
